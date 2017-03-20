@@ -22,4 +22,52 @@ displayData(X(sel, :));
 fprintf('Program paused. Press enter to continue.\n');
 pause;
 
+fprintf('\nLoading Saved Neural Network Parameters ...\n')
+
+% Load the weights into variables Theta1 and Theta2
+load('ex4weights.mat');
+
+% Unroll parameters 
+nn_params = [Theta1(:) ; Theta2(:)];
+
+
+fprintf('\nFeedforward Using Neural Network ...\n')
+
+% Weight regularization parameter (we set this to 0 here).
+lambda = 0;
+
+J = nnCostFunction(nn_params, input_layer_size, hidden_layer_size, ...
+                   num_labels, X, y, lambda);
+
+fprintf(['Cost at parameters (loaded from ex4weights): %f '...
+         '\n(this value should be about 0.287629)\n'], J);
+
+fprintf('\nProgram paused. Press enter to continue.\n');
+pause;
+
+
+fprintf('\nChecking Cost Function (w/ Regularization) ... \n')
+
+% Weight regularization parameter (we set this to 1 here).
+lambda = 1;
+
+J = nnCostFunction(nn_params, input_layer_size, hidden_layer_size, ...
+                   num_labels, X, y, lambda);
+
+fprintf(['Cost at parameters (loaded from ex4weights): %f '...
+         '\n(this value should be about 0.383770)\n'], J);
+
+fprintf('Program paused. Press enter to continue.\n');
+pause;
+
+
+fprintf('\nEvaluating sigmoid gradient...\n')
+
+g = sigmoidGradient([-1 -0.5 0 0.5 1]);
+fprintf('Sigmoid gradient evaluated at [-1 -0.5 0 0.5 1]:\n  ');
+fprintf('%f ', g);
+fprintf('\n\n');
+
+fprintf('Program paused. Press enter to continue.\n');
+pause;
 
